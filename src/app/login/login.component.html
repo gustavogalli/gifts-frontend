@@ -1,0 +1,26 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
+      <h2 class="text-2xl font-bold text-center mb-4">Login</h2>
+      
+      <form (submit)="onSubmit()" class="space-y-4">
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+          <input id="username" type="text" [(ngModel)]="username" name="username" required
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+          
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+          <input id="password" type="password" [(ngModel)]="password" name="password" required
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+        </div>
+        
+        <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none">Login</button>
+        
+        <div class="mt-4 text-center">
+          <span>No account yet? <a routerLink="/register" class="text-blue-500">Register</a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+  
