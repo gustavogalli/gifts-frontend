@@ -1,0 +1,126 @@
+<div class="min-h-screen bg-gray-100 p-8">
+  <div class="mb-6 -mx-8">
+    <span class="bg-yellow-400 inline-block pl-12 pr-6 py-2 w-max text-2xl font-bold rounded-r">
+      Hi, {{ username }}.
+    </span>
+  </div>
+
+  <!-- On sale Carousel -->
+  <div class="mb-8 relative">
+    <h2 class="text-xl font-semibold mb-4">Hot deals</h2>
+
+    <!-- Previous arrow -->
+    <button *ngIf="salePage > 0" (click)="prevSale()"
+      class="absolute left-0 top-1/2 -translate-y-1/2 bg-yellow-400 rounded-full shadow p-2 hover:bg-yellow-500 z-10">‹</button>
+
+    <!-- Grid for displaying 4 products per page -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div *ngFor="let product of currentSaleSlice"
+        class="relative bg-white py-4 px-6 rounded-lg shadow hover:shadow-md transition cursor-pointer flex flex-col"
+        (click)="goToDetails(product.id)">
+        <!-- Badge % OFF -->
+        <div *ngIf="product.discountPercentage > 0"
+          class="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
+          {{ product.discountPercentage * 100 | number:'1.0-0' }}% OFF
+        </div>
+
+        <h3 class="text-lg font-semibold mb-2">{{ product.name }}</h3>
+        <p class="text-gray-600 mb-4 flex-1">{{ product.description }}</p>
+
+        <!-- Prices -->
+        <div class="mb-2">
+          <p *ngIf="product.discountPercentage > 0" class="text-green-600 font-bold text-lg">
+            {{ product.price * (1 - product.discountPercentage) | currency:'USD' }}
+          </p>
+          <p *ngIf="product.discountPercentage > 0" class="text-gray-400 line-through text-sm">
+            {{ product.price | currency:'USD' }}
+          </p>
+          <p *ngIf="product.discountPercentage === 0" class="text-gray-800 font-bold">
+            {{ product.price | currency:'USD' }}
+          </p>
+        </div>
+
+        <button (click)="addToCart(product); $event.stopPropagation()"
+          class="mt-auto w-full bg-yellow-400 text-gray-800 py-2 rounded hover:bg-yellow-500">Snag the deal!</button>
+      </div>
+    </div>
+
+    <!-- Next arrow -->
+    <button *ngIf="salePage < pageCount - 1" (click)="nextSale()"
+      class="absolute right-0 top-1/2 -translate-y-1/2 bg-yellow-400 rounded-full shadow p-2 hover:bg-yellow-500 z-10">›</button>
+  </div>
+
+  <!-- Bordered Separator -->
+  <div class="border-t-2 border-yellow-400 my-12"></div>
+
+  <!-- Top 3 Best Sellers -->
+  <div class="mb-8">
+    <h2 class="text-xl font-semibold mb-4">Top 3 Best Sellers</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div *ngFor="let product of bestSellers"
+        class="relative bg-white p-4 rounded-lg shadow hover:shadow-md transition cursor-pointer flex flex-col"
+        (click)="goToDetails(product.id)">
+
+        <!-- Badge % OFF -->
+        <div *ngIf="product.discountPercentage > 0"
+          class="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
+          {{ product.discountPercentage * 100 | number:'1.0-0' }}% OFF
+        </div>
+
+        <h3 class="text-lg font-semibold mb-2">{{ product.name }}</h3>
+        <p class="text-gray-600 mb-4 flex-1">{{ product.description }}</p>
+
+        <!-- Prices -->
+        <div class="mb-2">
+          <p *ngIf="product.discountPercentage > 0" class="text-green-600 font-bold text-lg">
+            {{ product.price * (1 - product.discountPercentage) | currency:'USD' }}
+          </p>
+          <p *ngIf="product.discountPercentage > 0" class="text-gray-400 line-through text-sm">
+            {{ product.price | currency:'USD' }}
+          </p>
+          <p *ngIf="product.discountPercentage === 0" class="text-gray-800 font-bold">
+            {{ product.price | currency:'USD' }}
+          </p>
+        </div>
+
+        <p class="text-sm text-green-600 mb-2">{{ product.soldQuantity }} sold</p>
+
+        <button (click)="addToCart(product); $event.stopPropagation()"
+          class="mt-auto w-full bg-yellow-400 text-gray-800 py-2 rounded hover:bg-yellow-500">
+          Add to cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Border separator -->
+  <div class="border-t-2 border-yellow-400 my-12"></div>
+
+  <!-- More products -->
+  <h2 class="text-xl font-semibold mb-4">More products...</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div *ngFor="let product of products"
+      class="bg-white p-4 rounded-lg shadow hover:shadow-md transition cursor-pointer"
+      (click)="goToDetails(product.id)">
+      <h3 class="text-lg font-semibold mb-2">{{ product.name }}</h3>
+      <p class="text-gray-600 mb-4">{{ product.description }}</p>
+      <p class="text-gray-800 font-bold mb-1">
+        <span *ngIf="product.discountPercentage > 0" class="text-green-600">
+          {{ product.price * (1 - product.discountPercentage) | currency: 'USD' }}
+        </span>
+        <span *ngIf="product.discountPercentage > 0" class="line-through text-gray-400 ml-2">
+          {{ product.price | currency: 'USD' }}
+        </span>
+        <span *ngIf="product.discountPercentage === 0">
+          {{ product.price | currency: 'USD' }}
+        </span>
+      </p>
+      <p class="text-sm text-gray-400 mb-2">In stock: {{ product.stockQuantity }}</p>
+
+      <button (click)="addToCart(product); $event.stopPropagation()"
+        class="mt-4 w-full bg-yellow-400 text-gray-800 py-2 rounded hover:bg-yellow-500">
+        Add to cart
+      </button>
+    </div>
+  </div>
+</div>

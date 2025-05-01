@@ -16,7 +16,6 @@
 
 <div class="w-full border-t border-yellow-400">
   <div class="flex w-full">
-    <!-- Aqui serão exibidas as categorias -->
     <button *ngFor="let category of categories" [routerLink]="['/category', category]"
       class="flex-1 bg-gray-800 text-gray-100 py-2 rounded-none hover:bg-yellow-500 transition hover:text-gray-800 text-center">
       {{ category }}
