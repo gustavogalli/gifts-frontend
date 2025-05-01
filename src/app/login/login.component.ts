@@ -16,9 +16,9 @@ export class LoginComponent {
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe(
       (response) => {
-        alert('Login realizado com sucesso!');
-        localStorage.setItem('token', response.token); 
-        // this.router.navigate(['/home']);
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('fullName', response.fullName);
+        this.router.navigate(['/home']);
       },
       (error) => {
         alert('Erro ao fazer login');

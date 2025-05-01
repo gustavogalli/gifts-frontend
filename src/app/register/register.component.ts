@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
 export class RegisterComponent {
   username: string = '';
   fullName: string = '';
-  address: string = '';
+  city: string = '';
   password: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -19,7 +19,7 @@ export class RegisterComponent {
     const user = {
       username: this.username,
       fullName: this.fullName,
-      address: this.address,
+      city: this.city,
       password: this.password
     };
     

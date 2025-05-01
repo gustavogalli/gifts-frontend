@@ -1,6 +1,6 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
   <div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
-    <h2 class="text-2xl font-bold text-center mb-4">Register</h2>
+    <h2 class="text-2xl font-bold text-center mb-4">Who are you?</h2>
     
     <form (submit)="onSubmit()" class="space-y-4">
       <div>
@@ -16,8 +16,8 @@
       </div>
       
       <div>
-        <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
-        <input id="address" type="text" [(ngModel)]="address" name="address" required
+        <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+        <input id="city" type="text" [(ngModel)]="city" name="city" required
           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
       </div>
       
@@ -27,7 +27,10 @@
           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
       </div>
       
-      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none">Done</button>
+      <button type="submit" class="w-full bg-yellow-400 text-gray-800 py-2 rounded-md hover:bg-yellow-500 focus:outline-none">Register</button>
     </form>
+    <div class="mt-4 text-center">
+      <span>Back to <a routerLink="/login" class="text-gray-800 font-bold">Login</a></span>
+    </div>
   </div>
 </div>
