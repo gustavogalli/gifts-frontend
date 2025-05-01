@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   productsOnSale: Product[] = [];
   bestSellers: Product[] = [];
   categories: string[] = [];
-  selectedCategory: string = '';
 
   salePage = 0;
   pageCount = 0;
@@ -35,13 +34,13 @@ export class HomeComponent implements OnInit {
 
     this.productService.getAllProducts().subscribe(
       (data: Product[]) => {
-        this.products = data.filter(p => p.stockQuantity > 0).sort((a, b) => b.stockQuantity - a.stockQuantity);
+        this.products = data
+          .filter(p => p.stockQuantity > 0)
+          .sort((a, b) => b.stockQuantity - a.stockQuantity);
 
         this.productsOnSale = data
           .filter(p => p.discountPercentage > 0)
           .sort((a, b) => b.discountPercentage - a.discountPercentage);
-
-        this.pageCount = Math.ceil(this.productsOnSale.length / 4);
 
         this.bestSellers = [...data]
           .sort((a, b) => b.soldQuantity - a.soldQuantity)
@@ -50,6 +49,8 @@ export class HomeComponent implements OnInit {
         this.categories = [...new Set(data.map(p => p.category))]
           .filter(c => !!c)
           .sort((a, b) => a.localeCompare(b));
+
+        this.pageCount = Math.ceil(this.productsOnSale.length / 4);
 
       },
       err => console.error('Failed to get products:', err)
