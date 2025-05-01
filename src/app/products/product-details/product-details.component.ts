@@ -11,7 +11,6 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product!: Product;
-  selectedQuantity: number = 1;
 
   constructor(
     private route: ActivatedRoute,

@@ -62,7 +62,7 @@ export class ProductsListComponent implements OnInit {
 
   addToCart(product: Product): void {
     this.cartService.addToCart(product);
-    alert('Produto adicionado ao carrinho!');
+    alert(`"${product.name}" added to cart!`);
   }
 
   goToDetails(id: number): void {
