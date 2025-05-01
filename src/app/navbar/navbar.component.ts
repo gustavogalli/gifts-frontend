@@ -14,7 +14,7 @@ export class NavbarComponent {
   constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit() {
-    this.productService.gettAllCategories().subscribe(
+    this.productService.getAllCategories().subscribe(
       data => {
         this.categories = data.sort((a, b) => a.localeCompare(b));
       },
