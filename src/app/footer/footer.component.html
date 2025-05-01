@@ -1,0 +1,35 @@
+<footer class="bg-gray-900 text-gray-200 py-2">
+  <div class="max-w-6xl mx-auto px-4 py-3">
+    <div class="flex justify-center space-x-6 text-sm">
+      <button (click)="openModal('contact')" class="hover:text-yellow-400">Contact me</button>
+      <button (click)="openModal('terms')" class="hover:text-yellow-400">Terms of Use</button>
+      <button (click)="openModal('privacy')" class="hover:text-yellow-400">Privacy Policy</button>
+    </div>
+    <div class="mt-4 text-center text-xs text-gray-400">
+      Developed by Gustavo Galli
+    </div>
+  </div>
+
+  <div
+    *ngIf="modalContent"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40 z-50"
+    (click)="closeModal()"
+  >
+    <div
+      class="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden transform transition-transform duration-200 scale-95 hover:scale-100"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="bg-gray-800 text-white px-6 py-4 flex justify-between items-center">
+        <h2 class="text-xl font-semibold">{{ modalTitle }}</h2>
+        <button
+          (click)="closeModal()"
+          class="text-gray-200 hover:text-gray-400 text-2xl leading-none"
+        >&times;</button>
+      </div>
+
+      <div class="p-6 space-y-4 text-gray-800">
+        <div [innerHTML]="modalContent"></div>
+      </div>
+    </div>
+  </div>
+</footer>
