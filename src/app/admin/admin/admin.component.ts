@@ -23,7 +23,8 @@ export class AdminComponent implements OnInit {
     stockQuantity: 0,
     soldQuantity: 0,
     quantityInCart: 0,
-    discountPercentage: 0
+    discountPercentage: 0,
+    totalGrossSales: 0
   };
 
   constructor(private productService: ProductService) { }
@@ -65,7 +66,8 @@ export class AdminComponent implements OnInit {
       stockQuantity: 0,
       soldQuantity: 0,
       quantityInCart: 0,
-      discountPercentage: 0
+      discountPercentage: 0,
+      totalGrossSales: 0
     };
   }
 
@@ -147,12 +149,12 @@ export class AdminComponent implements OnInit {
       case 'name-desc':
         filtered.sort((a, b) => b.name.localeCompare(a.name));
         break;
-      case 'price-asc':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-desc':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
+      // case 'price-asc':
+      //   filtered.sort((a, b) => a.price - b.price);
+      //   break;
+      // case 'price-desc':
+      //   filtered.sort((a, b) => b.price - a.price);
+      //   break;
       case 'price-disc-asc':
         filtered.sort((a, b) => (a.price * (1 - a.discountPercentage)) - (b.price * (1 - b.discountPercentage)));
         break;
@@ -176,6 +178,12 @@ export class AdminComponent implements OnInit {
         break;
       case 'disc-desc':
         filtered.sort((a, b) => b.discountPercentage - a.discountPercentage);
+        break;
+      case 'total-asc':
+        filtered.sort((a, b) => a.totalGrossSales - b.totalGrossSales);
+        break;
+      case 'total-desc':
+        filtered.sort((a, b) => b.totalGrossSales - a.totalGrossSales);
         break;
     }
 

@@ -19,8 +19,8 @@
             <option value="">None</option>
             <option value="name-asc">Name - A to Z</option>
             <option value="name-desc">Name - Z to A</option>
-            <option value="price-desc">Original Price - High to low</option>
-            <option value="price-asc">Original Price - Low to high</option>
+            <!-- <option value="price-desc">Original Price - High to low</option>
+            <option value="price-asc">Original Price - Low to high</option> -->
             <option value="price-disc-desc">Discounted price - High to low</option>
             <option value="price-disc-asc">Discounted price - Low to high</option>
             <option value="stock-desc">Stock - More quantity</option>
@@ -29,6 +29,8 @@
             <option value="sold-asc">Sold - Less quantity</option>
             <option value="disc-desc">Discount - High to low</option>
             <option value="disc-asc">Discount - Low to high</option>
+            <option value="total-desc">Total gross - High to low</option>
+            <option value="total-asc">Total gross - Low to high</option>
         </select>
     </div>
 
@@ -39,11 +41,12 @@
             <th class="border p-2 text-center w-32">Name</th>
             <th class="border p-2 text-center w-56">Description</th>
             <th class="border p-2 text-center w-24">Category</th>
-            <th class="border p-2 text-center w-20">Original price</th>
+            <!-- <th class="border p-2 text-center w-20">Original price</th> -->
             <th class="border p-2 text-center w-20">Discounted price</th>
             <th class="border p-2 text-center w-20">Stock</th>
             <th class="border p-2 text-center w-20">Sold</th>
             <th class="border p-2 text-center w-20">Discount</th>
+            <th class="border p-2 text-center w-20">Total gross</th>
             <th class="border p-2 text-center w-20">Actions</th>
           </tr>
         </thead>
@@ -53,12 +56,13 @@
                 <td class="border p-2 text-left">{{ product.name }}</td>
                 <td class="border p-2 text-left">{{ product.description }}</td>
                 <td class="border p-2 text-left">{{ product.category }}</td>
-                <td class="border p-2 text-center">{{ product.price | currency:'USD' }}</td>
+                <!-- <td class="border p-2 text-center">{{ product.price | currency:'USD' }}</td> -->
                 <td class="border p-2 text-center">{{ product.price * (1 - product.discountPercentage)| currency:'USD'
                     }}</td>
                 <td class="border p-2 text-center">{{ product.stockQuantity }}</td>
                 <td class="border p-2 text-center">{{ product.soldQuantity }}</td>
                 <td class="border p-2 text-center">{{ product.discountPercentage * 100 }}%</td>
+                <td class="border p-2 text-center">{{ product.totalGrossSales | currency:'USD' }}</td>
                 <td class="border p-2 text-center">
                     <div class="flex items-center justify-center gap-3">
                         <button (click)="editProduct(product)" class="text-blue-600 hover:text-blue-800">

@@ -8,4 +8,5 @@ export interface Product {
   quantityInCart: number
   price: number;
   discountPercentage: number;
+  totalGrossSales: number
 }
