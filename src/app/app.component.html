@@ -1,6 +1,6 @@
 <div class="min-h-screen flex flex-col">
-    <app-navbar *ngIf="!isAuthPage"></app-navbar>
+    <app-navbar *ngIf="!router.url.includes('/login') && !router.url.includes('/register')"></app-navbar>
     <main class="flex-1"> <router-outlet></router-outlet></main>
-    <app-footer *ngIf="!isAuthPage"></app-footer>
+    <app-footer *ngIf="!router.url.includes('/login') && !router.url.includes('/register')"></app-footer>
 </div>
   

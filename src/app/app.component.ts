@@ -7,15 +7,11 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  isAuthPage: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(public router: Router) {}
 
-  ngOnInit() {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.isAuthPage = event.url.includes('/login') || event.url.includes('/register');
-      }
-    });
+  ngOnInit(): void {
+    
   }
+
 }
