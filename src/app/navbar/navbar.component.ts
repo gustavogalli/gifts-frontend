@@ -10,10 +10,13 @@ import { ProductService } from '../services/product.service';
 export class NavbarComponent {
 
   categories: string[] = [];
+  isAdmin: boolean = false;
 
   constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit() {
+    localStorage.getItem('fullName') == 'Admin' ? this.isAdmin = true : this.isAdmin = false;
+
     this.productService.getAllCategories().subscribe(
       data => {
         this.categories = data.sort((a, b) => a.localeCompare(b));

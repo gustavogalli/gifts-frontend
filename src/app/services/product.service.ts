@@ -12,42 +12,40 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getAllProducts(): Observable<Product[]> {
+  private getAuthHeaders(): HttpHeaders {
     const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
+    return new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.get<Product[]>(this.apiUrl, { headers });
+  }
+
+  createProduct(product: Omit<Product, 'id'>): Observable<Product> {
+    return this.http.post<Product>(this.apiUrl, product, { headers: this.getAuthHeaders() });
+  }
+
+  getAllProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl, { headers: this.getAuthHeaders() });
   }
 
   getAllCategories(): Observable<string[]> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-    return this.http.get<string[]>(this.apiUrl + "/category", { headers });
+    return this.http.get<string[]>(this.apiUrl + "/category", { headers: this.getAuthHeaders() });
   }
 
   getProductsByCategory(category: string): Observable<Product[]> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-  
-    return this.http.get<Product[]>(`${this.apiUrl}/category/${category}`, { headers });
+    return this.http.get<Product[]>(`${this.apiUrl}/category/${category}`, { headers: this.getAuthHeaders() });
   }
 
-  purchaseProducts(products: Product[]): Observable<void> {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-  
-    return this.http.post<void>(`${this.apiUrl}/purchase`, products, { headers });
+  updateProduct(id: number, product: Omit<Product, 'id'>): Observable<Product> {
+    return this.http.put<Product>(`${this.apiUrl}/${id}`, product, { headers: this.getAuthHeaders() });
   }
   
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+  }
+  
+  purchaseProducts(products: Product[]): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/purchase`, products, { headers: this.getAuthHeaders() });
+  }
+
 }
